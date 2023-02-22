@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!--        <property name="hibernate.connection.url">jdbc:mysql://freeplaces.net:3306/VodaCourseFlyAwayTest</property>-->
+        <property name="hibernate.connection.url">jdbc:mysql://theapi.xyz:3306/VodaCourseFlyAwayTest</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">survive</property>
+        <!--        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>-->
+        <property name="dialect">org.hibernate.dialect.MariaDB10Dialect</property>
+        <property name="show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <mapping class="iniko.Voda.DAO.flight"/>
+        <mapping class="iniko.Voda.DAO.Ticket"/>
+        <mapping class="iniko.Voda.DAO.User"/>
+    </session-factory>
+</hibernate-configuration>
