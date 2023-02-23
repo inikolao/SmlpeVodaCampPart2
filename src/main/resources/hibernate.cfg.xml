@@ -12,10 +12,15 @@
         <!--        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>-->
         <property name="dialect">org.hibernate.dialect.MariaDB10Dialect</property>
         <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        <mapping class="iniko.Voda.DAO.flight"/>
+        <mapping class="iniko.Voda.DAO.Flight"/>
         <mapping class="iniko.Voda.DAO.Ticket"/>
         <mapping class="iniko.Voda.DAO.User"/>
+        <mapping class="iniko.Voda.DAO.Airport"/>
+        <mapping class="iniko.Voda.DAO.Airplane"/>
+        <mapping class="iniko.Voda.DAO.PassengerDetail"/>
+        <mapping class="iniko.Voda.DAO.Airliner"/>
+        <mapping class="iniko.Voda.DAO.Passenger"/>
     </session-factory>
 </hibernate-configuration>
