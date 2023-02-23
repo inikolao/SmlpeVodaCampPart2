@@ -13,11 +13,12 @@ public class User {
     @Column(name = "id")
     private int id;
     @NotNull
-    public String Username;
+    private String Username;
     @NotNull
-    public String Password;
-    public Date ResistrationActive;
-    public boolean IsActive;
+    private String Password;
+    private Date ResistrationActive;
+    private boolean IsActive;
+    private boolean IsAdmin;
 
     public User() {
     }
@@ -62,6 +63,14 @@ public class User {
         IsActive = active;
     }
 
+    public boolean isAdmin() {
+        return IsAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        IsAdmin = admin;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -70,6 +79,7 @@ public class User {
                 ", Password='" + Password + '\'' +
                 ", ResistrationActive=" + ResistrationActive +
                 ", IsActive=" + IsActive +
+                ", IsAdmin=" + IsAdmin +
                 '}';
     }
 }

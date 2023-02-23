@@ -14,7 +14,7 @@
       <div class="row">
         <div class="booking-form">
 
-<div class="container-xxl"><form>
+<div class="container-xxl"><form action="/login" method="post">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
