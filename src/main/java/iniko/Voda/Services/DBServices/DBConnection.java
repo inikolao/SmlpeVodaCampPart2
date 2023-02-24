@@ -17,6 +17,9 @@ public class DBConnection implements IDBConnect{
 
         sessionFactory=buildSessionFactory();
     }
+    public DBConnection(int x) {
+
+    }
 
     @Override
     public SessionFactory getSessionFactory() {
@@ -73,5 +76,13 @@ public class DBConnection implements IDBConnect{
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DBConnection{" +
+                "session=" + session +
+                ", transaction=" + transaction +
+                '}';
     }
 }

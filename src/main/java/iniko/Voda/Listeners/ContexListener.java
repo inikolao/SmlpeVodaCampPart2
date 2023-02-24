@@ -43,10 +43,12 @@ public class ContexListener implements ServletContextListener, ServletContextAtt
         Admin.setResistrationActive(dateOne.from(inst));
         Admin.setActive(true);
         DBConnection dbConnection=new DBConnection();
-       Session sn= dbConnection.getSessionFactory().openSession();
+       Session sn= dbConnection.InialiseDBSession(dbConnection.getSessionFactory());
        dbConnection.StartTransaction(sn);
        sn.saveOrUpdate(Admin);
        dbConnection.CommitTransaction(dbConnection.getTransaction());
+       //sn.close();
+        //dbConnection.setSession(sn);
         ServletContext sc=sce.getServletContext();
         sc.setAttribute("sessionDB",dbConnection);
         ServletContextListener.super.contextInitialized(sce);

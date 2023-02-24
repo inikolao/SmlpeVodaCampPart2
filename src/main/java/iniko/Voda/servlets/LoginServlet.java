@@ -2,7 +2,10 @@ package iniko.Voda.servlets;
 
 import iniko.Voda.DAO.User;
 import iniko.Voda.Listeners.ContexListener;
+import iniko.Voda.Services.DBServices.Crud.Repos.UserRepo;
+import iniko.Voda.Services.DBServices.Crud.Repos.UserRepository;
 import iniko.Voda.Services.DBServices.DBConnection;
+import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -11,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -25,33 +30,37 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DBConnection db=(DBConnection) getServletContext().getAttribute("sessionDB");
-        System.out.println("Look !  "+req.getAttributeNames().toString());
-        System.out.println("Look !  "+db.toString());
-        //db.getSession().
-        //CriteriaQuery<User> cq= db.getSession().getCriteriaBuilder().createQuery(User.class);
-        //CriteriaQuery<Book> cq = session.getCriteriaBuilder().createQuery(Book.class);
-         CriteriaQuery<User> criteriaQuery=  db.getSession().getCriteriaBuilder().createQuery(User.class);
-         Root<User> root = criteriaQuery.from(User.class);
-         criteriaQuery.select(root).;
+        resp.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+        resp.setHeader("Pragma", "no-cache");//http1.0
+        resp.setHeader("Pragma", "0");//proxies
+        UserRepository urepo=new UserRepo();
+        User uf=urepo.FindUserByUsernane(req.getParameter("email"));
+        if(Objects.nonNull(uf))
+        {
+            System.out.println("db Fu: "+uf.getUsername());
+            if (uf.getPassword().equals(req.getParameter("password")))
+            {
+                System.out.println("ok");
+                resp.setContentType("text/html");
+                HttpSession session = req.getSession();
+                session.setAttribute("admin","yes");
+                resp.sendRedirect("admin/dashboard.jsp");
+            }
+            else
+            {
+                resp.setContentType("text/html");
 
-         criteriaQuery.select(criteriaQuery.from(User.class));
-        criteriaQuery.where(builder.equal(pageField.get("page").get("id"), pageId));
+                System.out.println("error");
+                resp.sendRedirect("login.jsp");
+            }
+        }
+        else
+        {
+            resp.setContentType("text/html");
 
-         SearchResult<Book> result = Search.session( entityManager )
-                .search( Book.class )
-                .where( f -> f.match()
-                        .fields( "title", "authors.name" )
-                        .matching( "Isaac" ) )
-                .fetch( 20 );
-        Criteria cr = session.createCriteria(Employee.class);
-        cr.add(Restrictions.eq("salary", 2000));
-        List results = cr.list();
-        // cq.from(User.class);
-        resp.setContentType("text/html");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        resp.sendRedirect("Dashboard");
+            System.out.println("error");
+            resp.sendRedirect("login.jsp");
+        }
 
     }
 

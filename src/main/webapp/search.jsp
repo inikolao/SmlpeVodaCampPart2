@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="booking-form">
-                    <form>
+                    <form action="search" method="post">
                         <div class="form-group">
                             <div class="form-checkbox">
                                 <label for="roundtrip">
