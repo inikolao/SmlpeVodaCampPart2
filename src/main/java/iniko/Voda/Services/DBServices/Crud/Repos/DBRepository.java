@@ -21,6 +21,16 @@ public interface DBRepository {
         SESSION.close();
 
     }
+    default void saveX(Object obj)
+    {
+        DBConnection con=new DBConnection(2);
+        Session sn=con.InialiseDBSession(con.getSessionFactory());
+        Transaction tx=con.StartTransaction(sn);
+        sn.save(obj);
+        tx.commit();
+        sn.close();
+
+    }
     default void delete(Object obj)
     {
         SESSION.beginTransaction();

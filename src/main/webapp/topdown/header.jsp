@@ -31,7 +31,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-
+    <script type="text/javascript" src="js/pageCh.js"></script>
 </head>
 <body>
 <!-- conditional display of a second password field -->
@@ -62,6 +62,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav d-flex">
+                <li class="nav-item"><a class="nav-link" href="register.jsp">Register</a>
                 <li class="nav-item"><a class="nav-link" href="login.jsp">LogIn</a>
             </ul>
         </div>

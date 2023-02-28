@@ -29,6 +29,7 @@ public interface UserRepository extends DBRepository {
     }
     default List<User> GetAll()
     {
+       // DBRepository.select(User.class);
         return users;
     }
 

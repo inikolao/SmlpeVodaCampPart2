@@ -2,7 +2,9 @@ package iniko.Voda.DAO;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,8 +18,12 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "airliner_id")
     private Airliner airliner;
+    @NotNull
     private String HomeAirport;
+    @NotNull
     private String DestinationAirport;
+    @NotNull
+    private Date FlightDate;
     private boolean HasMidlleStops;
     private int NumMidleStops;
     @OneToMany
@@ -90,6 +96,14 @@ public class Flight {
 
     public void setPassesngerDetails(int passesngerDetails) {
         PassesngerDetails = passesngerDetails;
+    }
+
+    public Date getFlightDate() {
+        return FlightDate;
+    }
+
+    public void setFlightDate(Date flightDate) {
+        FlightDate = flightDate;
     }
 
     @Override

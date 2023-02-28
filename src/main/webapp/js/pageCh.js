@@ -19,3 +19,20 @@ $(function() {
         $(this).addClass("active");
     });
 });
+
+function changes(ch) {
+    if (document.getElementById("roundtrip").checked === true) {
+        document.getElementById("retdate").disabled = false;
+        document.getElementById("retdate").setAttribute("required", "required");
+    } else if (document.getElementById("one-way").checked === true) {
+        document.getElementById("retdate").disabled=true;
+        document.getElementById("retdate").value="";
+        document.getElementById("retdate").setAttribute("required","");
+    }
+    else
+    {
+        document.getElementById("retdate").disabled=true;
+        document.getElementById("retdate").setAttribute("required","");
+
+    }
+};

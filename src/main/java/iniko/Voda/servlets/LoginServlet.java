@@ -1,14 +1,9 @@
 package iniko.Voda.servlets;
 
 import iniko.Voda.DAO.User;
-import iniko.Voda.Listeners.ContexListener;
-import iniko.Voda.Services.DBServices.Crud.Repos.UserRepo;
+import iniko.Voda.Services.DBServices.Crud.Repos.Impl.UserRepo;
 import iniko.Voda.Services.DBServices.Crud.Repos.UserRepository;
-import iniko.Voda.Services.DBServices.DBConnection;
-import org.hibernate.Session;
 
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +20,11 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+       // super.doGet(req, resp);
+        resp.setContentType("text/html");
+
+        System.out.println("error");
+        resp.sendRedirect("login.jsp");
     }
 
     @Override
@@ -43,8 +42,14 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("ok");
                 resp.setContentType("text/html");
                 HttpSession session = req.getSession();
-                session.setAttribute("admin","yes");
-                resp.sendRedirect("admin/dashboard.jsp");
+                if (uf.getUsername().contains("admin")) {
+                    session.setAttribute("admin","yes");
+                    resp.sendRedirect("admin/dashboard.jsp");
+                } else {
+                    session.setAttribute("user","yes");
+                    session.setAttribute("username",uf.getUsername());
+                    resp.sendRedirect("user/home.jsp");
+                }
             }
             else
             {

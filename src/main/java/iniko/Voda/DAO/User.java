@@ -3,6 +3,7 @@ package iniko.Voda.DAO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -16,6 +17,11 @@ public class User {
     private String Username;
     @NotNull
     private String Password;
+    @NotNull
+    private int Phone;
+    private int Mobile;
+    @NotNull
+    private String Address;
     private Date ResistrationActive;
     private boolean IsActive;
     private boolean IsAdmin;
@@ -55,6 +61,12 @@ public class User {
         ResistrationActive = resistrationActive;
     }
 
+    public void setResistrationActive() {
+        Date dateOne = new Date();
+        Instant inst = Instant.now();
+        ResistrationActive = dateOne.from(inst);
+    }
+
     public boolean isActive() {
         return IsActive;
     }
@@ -69,6 +81,30 @@ public class User {
 
     public void setAdmin(boolean admin) {
         IsAdmin = admin;
+    }
+
+    public int getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(int phone) {
+        Phone = phone;
+    }
+
+    public int getMobile() {
+        return Mobile;
+    }
+
+    public void setMobile(int mobile) {
+        Mobile = mobile;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 
     @Override

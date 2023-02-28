@@ -1,4 +1,4 @@
-<%@ page import="iniko.Voda.Services.DBServices.Crud.Repos.UserRepo" %>
+<%@ page import="iniko.Voda.Services.DBServices.Crud.Repos.Impl.UserRepo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="iniko.Voda.DAO.User" %><%--
   Created by IntelliJ IDEA.
@@ -30,11 +30,24 @@
         out.print("<th>"+x.getUsername()+"</th>");
         out.print("<th>"+x.getResistrationActive()+"</th>");
         out.print("<th>"+x.isActive()+"</th>");
-        out.print("<th> <button type=\"button\" class=\"btn btn-secondary btn-sm\">Delete</button></th>");
+        out.print("<th> <button type=\"button\" class=\"btn btn-secondary btn-sm\">Delete</button></th></tr>");
 
 
     }
 %>
     </tbody>
 </table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
 <%@ include file="/topdown/footer.jsp"%>

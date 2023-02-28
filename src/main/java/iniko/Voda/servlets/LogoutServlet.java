@@ -19,7 +19,11 @@ public class LogoutServlet extends HttpServlet {
         resp.setContentType("text/html");
         HttpSession session = req.getSession();
         String admin = (String) session.getAttribute("admin");
-        if(admin != null) {
+        String user=(String) session.getAttribute("user");
+        if((admin != null)&&(req.getRequestURI().contains("admin"))) {
+            session.invalidate();
+        }
+        if((user != null)&&(req.getRequestURI().contains("user"))) {
             session.invalidate();
         }
 
