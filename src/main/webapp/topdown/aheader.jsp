@@ -57,6 +57,13 @@
         </li>
         <li class="nav-item"><a class="nav-link" href="users.jsp">UserDatabase</a>
         </li>
+        <%
+          String admin = (String) session.getAttribute("admin");
+          if(admin != null) {
+            out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"../index.jsp\"> CMS Home Page</a>");
+          }
+
+        %>
       </ul>
       <ul class="navbar-nav d-flex">
         <li class="nav-item"><a class="nav-link" href="../logout">Logout</a>

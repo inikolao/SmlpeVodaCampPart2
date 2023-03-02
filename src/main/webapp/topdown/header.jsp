@@ -42,7 +42,7 @@
                 %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">CMS</a>
+        <a class="navbar-brand" href="#">Fly Away</a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -58,12 +58,31 @@
                 </li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="search.jsp">Book A flight</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a>
-                </li>
+                <%
+                    String admin = (String) session.getAttribute("admin");
+                    String user=(String) session.getAttribute("user");
+                    if(admin != null) {
+                        out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin/dashboard.jsp\">Admin Dashboard</a>");
+                    }
+                    if(user != null) {
+                        out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"user/home.jsp\">User Panel</a>");
+                    }
+                %>
             </ul>
             <ul class="navbar-nav d-flex">
-                <li class="nav-item"><a class="nav-link" href="register.jsp">Register</a>
-                <li class="nav-item"><a class="nav-link" href="login.jsp">LogIn</a>
+
+                <%
+                if ((admin==null)&&(user==null))
+                {
+                    out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"register.jsp\">Register</a>\n" +
+                            "<li class=\"nav-item\"><a class=\"nav-link\" href=\"login.jsp\">LogIn</a>");
+                }
+                else
+                {
+                    out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout\">Logout</a>");
+                }
+
+                %>
             </ul>
         </div>
     </div>

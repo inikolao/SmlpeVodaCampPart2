@@ -55,6 +55,13 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="settings.jsp">settings</a>
                 </li>
+                <%
+
+                    String user=(String) session.getAttribute("user");
+                    if(user != null) {
+                        out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"../search.jsp\">Book A Flight</a>");
+                    }
+                %>
             </ul>
             <ul class="navbar-nav d-flex">
                 <li class="nav-item"><a class="nav-link" href="../logout">Logout</a>

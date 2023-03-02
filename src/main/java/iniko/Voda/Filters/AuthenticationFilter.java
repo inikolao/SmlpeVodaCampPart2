@@ -17,14 +17,14 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
         HttpSession session = ((HttpServletRequest) req).getSession();
         String admin= (String) session.getAttribute("admin");
         String user= (String) session.getAttribute("user");
-        System.out.println("email in filter "+admin );
+        System.out.println("Rq URI:  "+((HttpServletRequest) req).getRequestURI().toString() );
         if((admin==null)&&(((HttpServletRequest) req).getRequestURI().contains("admin")))
         {
             ((HttpServletResponse) res).sendRedirect("../login.jsp");
             return;
         }
 
-        if((user==null)&&(((HttpServletRequest) req).getRequestURI().startsWith("FyAway_war_exploded/user")))
+        if((user==null)&&(((HttpServletRequest) req).getRequestURI().startsWith("/FyAway_war_exploded/user/")))
         {
             ((HttpServletResponse) res).sendRedirect("../login.jsp");
             return;

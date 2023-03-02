@@ -9,13 +9,16 @@ import java.util.List;
 public interface UserRepository extends DBRepository {
 
     static List<User> users = (List<User>) DBRepository.select(User.class);
-    default void initialise(SessionFactory sessionFactory)
+     private void Fetch()
     {
-        DB_CONNECTION.setSessionFactory(sessionFactory);
-        DB_CONNECTION.InialiseDBSession(sessionFactory);
+        users.clear();
+        List<User> userList=(List<User>) DBRepository.select(User.class);
+        users.addAll(userList);
+
     }
     default User FindUserByUsernane(String value)
     {
+        Fetch();
         for (User x:users)
              {
                  //System.out.println(x.getUsername());

@@ -1,19 +1,20 @@
 package iniko.Voda.Services.DBServices.Crud.Repos;
 
 import iniko.Voda.DAO.Flight;
+import iniko.Voda.DAO.User;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 
 public interface FlightRepository extends DBRepository {
     static List<Flight> flights = (List<Flight>) DBRepository.select(Flight.class);
-
-    default void initialise(SessionFactory sessionFactory)
+    private void Fetch()
     {
-        DB_CONNECTION.setSessionFactory(sessionFactory);
-        DB_CONNECTION.InialiseDBSession(sessionFactory);
-    }
+        flights.clear();
+        List<Flight> FlightList=(List<Flight>) DBRepository.select(Flight.class);
+        flights.addAll(FlightList);
 
+    }
     default Flight GetFlightById(int ID)
     {
         for (Flight f:flights) {

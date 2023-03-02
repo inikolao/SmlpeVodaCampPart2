@@ -10,41 +10,50 @@ import java.util.List;
 
 public interface DBRepository {
 
-    DBConnection DB_CONNECTION=new DBConnection(2);
-    Session SESSION= DB_CONNECTION.InialiseDBSession(DB_CONNECTION.getSessionFactory());
-    Transaction TRANSACTION=DB_CONNECTION.getTransaction();
-    default void save(Object obj)
+    DBConnection DB_CONNECTION =new DBConnection(1);
+    //SessionFactory SESSION_FACTORY= DB_CONNECTION.getSessionFactory();
+
+    static Session initialise()
     {
-        SESSION.beginTransaction();
-        SESSION.save(obj);
-        TRANSACTION.commit();
-        SESSION.close();
+        SessionFactory sessionFactory= DB_CONNECTION.getSessionFactory();
+        return DB_CONNECTION.InialiseDBSession(sessionFactory);
 
     }
-    default void saveX(Object obj)
+
+    default void save(Object obj)
     {
-        DBConnection con=new DBConnection(2);
-        Session sn=con.InialiseDBSession(con.getSessionFactory());
-        Transaction tx=con.StartTransaction(sn);
+        Session sn=initialise();
+        sn.beginTransaction();
         sn.save(obj);
-        tx.commit();
+        sn.getTransaction().commit();
         sn.close();
+
 
     }
     default void delete(Object obj)
     {
-        SESSION.beginTransaction();
-        SESSION.delete(obj);
-        TRANSACTION.commit();
-        SESSION.close();
+        Session sn=initialise();
+        sn.beginTransaction();
+        sn.delete(obj);
+        sn.getTransaction().commit();
+        sn.close();
+    }
+
+    default void find(Class clasof, int id)
+    {
+        Session sn=initialise();
+        sn.beginTransaction();
+        sn.find(clasof,id);
+        sn.getTransaction().commit();
+        sn.close();
     }
     static Object select(Class clasof )
     {
-        Transaction tx=SESSION.beginTransaction();
-        CriteriaQuery<Object> cq = SESSION.getCriteriaBuilder().createQuery(clasof);
+        Session sn=initialise();
+        CriteriaQuery<Object> cq = sn.getCriteriaBuilder().createQuery(clasof);
         cq.from(clasof);
-        List<Object> objectList = SESSION.createQuery(cq).getResultList();
+        List<Object> objectList = sn.createQuery(cq).getResultList();
+        sn.close();
         return objectList;
-
     }
 }

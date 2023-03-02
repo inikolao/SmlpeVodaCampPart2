@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             {
                 resp.setContentType("text/html");
 
-                System.out.println("error");
+                System.out.println("ps error");
                 resp.sendRedirect("login.jsp");
             }
         }
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         {
             resp.setContentType("text/html");
 
-            System.out.println("error");
+            System.out.println("error no login creds");
             resp.sendRedirect("login.jsp");
         }
 

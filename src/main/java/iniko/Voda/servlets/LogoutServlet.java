@@ -20,14 +20,17 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String admin = (String) session.getAttribute("admin");
         String user=(String) session.getAttribute("user");
-        if((admin != null)&&(req.getRequestURI().contains("admin"))) {
+        System.out.println("Logout Rq URI:  "+((HttpServletRequest) req).getRequestURI().toString() );
+        if(admin != null) {
             session.invalidate();
+            System.out.println("Admin logout");
         }
-        if((user != null)&&(req.getRequestURI().contains("user"))) {
+        if(user != null) {
             session.invalidate();
+            System.out.println("User logout");
         }
 
-        System.out.println("logout");
+
         resp.sendRedirect("index.jsp");
     }
 

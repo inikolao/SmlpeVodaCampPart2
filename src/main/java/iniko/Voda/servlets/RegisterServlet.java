@@ -35,8 +35,8 @@ public class RegisterServlet  extends HttpServlet {
         reus.setAdmin(false);
         reus.setActive(true);
         UserRepo repo=new UserRepo();
-       // repo.save(reus);
-        repo.saveX(reus);
+        repo.save(reus);
+        //repo.saveX(reus);
         req.getParameter("isAdult");//deprecated
         HttpSession session = req.getSession();
         session.setAttribute("user","yes");
