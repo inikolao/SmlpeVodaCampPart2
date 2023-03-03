@@ -17,6 +17,7 @@ public interface FlightRepository extends DBRepository {
     }
     default Flight GetFlightById(int ID)
     {
+        Fetch();
         for (Flight f:flights) {
             if (f.getId()==ID)
             {

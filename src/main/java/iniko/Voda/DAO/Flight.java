@@ -31,6 +31,8 @@ public class Flight {
     private List<Airport> MidleStops;
     private int PassesngerDetails;
 
+    private int Price;
+
     public Airliner getAirliner() {
         return airliner;
     }
@@ -106,6 +108,14 @@ public class Flight {
         FlightDate = flightDate;
     }
 
+    public int getPrice() {
+        return Price;
+    }
+
+    public void setPrice(int price) {
+        Price = price;
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
@@ -113,10 +123,12 @@ public class Flight {
                 ", airliner=" + airliner +
                 ", HomeAirport='" + HomeAirport + '\'' +
                 ", DestinationAirport='" + DestinationAirport + '\'' +
+                ", FlightDate=" + FlightDate +
                 ", HasMidlleStops=" + HasMidlleStops +
                 ", NumMidleStops=" + NumMidleStops +
                 ", MidleStops=" + MidleStops +
                 ", PassesngerDetails=" + PassesngerDetails +
+                ", Price=" + Price +
                 '}';
     }
 }

@@ -12,6 +12,7 @@ public class Airport {
     @Column(name = "Airport_id")
     private int id;
     private String AirportName;
+    private String AirportPlace;
     private String Type;
 
     public Airport() {
@@ -41,11 +42,20 @@ public class Airport {
         Type = type;
     }
 
+    public String getAirportPlace() {
+        return AirportPlace;
+    }
+
+    public void setAirportPlace(String airportPlace) {
+        AirportPlace = airportPlace;
+    }
+
     @Override
     public String toString() {
         return "Airport{" +
                 "id=" + id +
                 ", AirportName='" + AirportName + '\'' +
+                ", AirportPlace='" + AirportPlace + '\'' +
                 ", Type='" + Type + '\'' +
                 '}';
     }

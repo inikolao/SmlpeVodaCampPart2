@@ -53,25 +53,28 @@ public class SearchServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         Search search=new Search(req.getParameter("airfrom"),req.getParameter("airto"),depdate,retdate,Integer.parseInt(req.getParameter("paseng")),Integer.parseInt(req.getParameter("chl")), TravelClass.valueOf(req.getParameter("tclass")));
-        List<Flight> srOne = null;
-        List<Flight> srTwo = null;
+        List<Flight> flights1 = null;
+        List<Flight> flights2 = null;
         switch (tftype){
             case 1://round trip
-                srOne= Stream.of( flights.stream().filter(flight -> search.getAirportFrom().equals(flight.getHomeAirport())&&search.getAirporTo().equals(flight.getDestinationAirport())&&search.getDepDate().equals(flight.getFlightDate())&&!flight.isHasMidlleStops()).findAny().orElse(null)).collect(Collectors.toList());
-                srTwo= Stream.of( flights.stream().filter(flight -> search.getAirporTo().equals(flight.getHomeAirport())&&search.getAirportFrom().equals(flight.getDestinationAirport())&&search.getRetDate().equals(flight.getFlightDate())&&!flight.isHasMidlleStops()).findAny().orElse(null)).collect(Collectors.toList());
+                flights1= flights.stream().filter(q->q.getHomeAirport().equals(search.getAirportFrom())).filter(q->q.getDestinationAirport().equals(search.getAirporTo())).filter(q->q.getFlightDate().getDate()==search.getDepDate().getDate()).filter(q->!q.isHasMidlleStops()).collect(Collectors.toList());
+                flights2= flights.stream().filter(q->q.getHomeAirport().equals(search.getAirporTo())).filter(q->q.getDestinationAirport().equals(search.getAirportFrom())).filter(q->q.getFlightDate().getDate()==search.getRetDate().getDate()).filter(q->!q.isHasMidlleStops()).collect(Collectors.toList());
+                req.setAttribute("Results2",flights2);
+                req.setAttribute("ResultsFlag",1);
                 break;
             case 2:// One way
-                srOne= Stream.of( flights.stream().filter(flight -> search.getAirportFrom().equals(flight.getHomeAirport())&&search.getAirporTo().equals(flight.getDestinationAirport())&&search.getDepDate().equals(flight.getFlightDate())&&!flight.isHasMidlleStops()).findAny().orElse(null)).collect(Collectors.toList());
-
+                flights1= flights.stream().filter(q->q.getHomeAirport().equals(search.getAirportFrom())).filter(q->q.getDestinationAirport().equals(search.getAirporTo())).filter(q->q.getFlightDate().getDate()==search.getDepDate().getDate()).filter(q-> !q.isHasMidlleStops()).collect(Collectors.toList());
                 break;
             case 3://Multy city?
-                srOne= Stream.of( flights.stream().filter(flight -> search.getAirportFrom().equals(flight.getHomeAirport())&&search.getAirporTo().equals(flight.getDestinationAirport())&&search.getDepDate().equals(flight.getFlightDate())&&flight.isHasMidlleStops()).findAny().orElse(null)).collect(Collectors.toList());
+                flights1= flights.stream().filter(q->q.getHomeAirport().equals(search.getAirportFrom())).filter(q->q.getDestinationAirport().equals(search.getAirporTo())).filter(q->q.getFlightDate().getDate()==search.getDepDate().getDate()).filter(q-> q.isHasMidlleStops()).collect(Collectors.toList());
+                req.setAttribute("ResultsFlag",3);
                 break;
             default:
                 System.out.println("");
         }
-        req.setAttribute("Results1",srOne);
-        req.setAttribute("Results2",srTwo);
+        assert flights1 != null;
+        System.out.println("sr One found: "+flights1.size());
+        req.setAttribute("Results1",flights1);
         req.getRequestDispatcher("results.jsp").forward(req, resp);
     }
 

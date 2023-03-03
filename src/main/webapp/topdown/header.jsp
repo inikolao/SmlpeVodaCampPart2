@@ -58,6 +58,10 @@
                 </li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="search.jsp">Book A flight</a>
                 </li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="airliners.jsp">Airliners</a>
+                </li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="travels.jsp">Places</a>
+                </li>
                 <%
                     String admin = (String) session.getAttribute("admin");
                     String user=(String) session.getAttribute("user");
