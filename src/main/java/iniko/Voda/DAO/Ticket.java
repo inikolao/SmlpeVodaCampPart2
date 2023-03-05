@@ -3,7 +3,9 @@ package iniko.Voda.DAO;
 import jdk.jfr.Relational;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @Table( name = "Tickets")
@@ -17,11 +19,13 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
+    private int price;
+    private String seat;
     private Date dateIssued;
     private boolean isValid;
     @OneToOne
-    @JoinColumn(name = "owner_id")
-    private Passenger owner;
+    @JoinColumn(name = "passenger_id")
+    private Passenger passenger;
 
     public Ticket() {
     }
@@ -32,6 +36,14 @@ public class Ticket {
 
     public void setFlight(iniko.Voda.DAO.Flight flight) {
         this.flight = flight;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getId() {
@@ -50,6 +62,13 @@ public class Ticket {
         this.dateIssued = dateIssued;
     }
 
+    public void setDateIssued()
+    {
+        Date dateOne = new Date();
+        Instant inst = Instant.now();
+        this.dateIssued = dateOne.from(inst);
+    }
+
     public boolean isValid() {
         return isValid;
     }
@@ -58,12 +77,20 @@ public class Ticket {
         isValid = valid;
     }
 
-    public Passenger getOwner() {
-        return owner;
+    public Passenger getPassenger() {
+        return passenger;
     }
 
-    public void setOwner(Passenger owner) {
-        this.owner = owner;
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
+
+    public String getSeat() {
+        return seat;
+    }
+
+    public void setSeat() {
+        this.seat = GenRandomString();
     }
 
     @Override
@@ -71,9 +98,24 @@ public class Ticket {
         return "Ticket{" +
                 "id=" + id +
                 ", flight=" + flight +
+                ", price=" + price +
+                ", seat='" + seat + '\'' +
                 ", dateIssued=" + dateIssued +
                 ", isValid=" + isValid +
-                ", owner=" + owner +
+                ", passenger=" + passenger +
                 '}';
+    }
+
+    private String GenRandomString()
+    {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 2;
+        Random random = new Random();
+
+        return (random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString());
     }
 }

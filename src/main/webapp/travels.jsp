@@ -29,7 +29,7 @@
                             ) {
                                 out.print("<tr>");
                                 out.print("<th>"+x+"</th>");
-                                out.print("<th> <button type=\"button\" class=\"btn btn-secondary btn-sm\" >Show me Flights</button></th></tr>");
+                                out.print("<th><form action=\"bookb\" method=\"post\" > <button type=\"submit\" value=\""+x+"\" name=\"flies\" class=\"btn btn-secondary btn-sm\" >Show me Flights</button></form></th></tr>");
 
 
                             }

@@ -13,7 +13,7 @@ public interface AirlineRepository  extends DBRepository{
         airliners.addAll(FlightList);
 
     }
-    default Airliner GetFlightById(int ID)
+    default Airliner GetAirlinerById(int ID)
     {
         Fetch();
         for (Airliner airliner:airliners) {

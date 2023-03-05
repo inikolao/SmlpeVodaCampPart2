@@ -30,8 +30,23 @@ public interface UserRepository extends DBRepository {
 
         return null;
     }
+    default User FindUserByID(int value)
+    {
+        Fetch();
+        for (User x:users)
+        {
+            //System.out.println(x.getUsername());
+            if(x.getId()==value)
+            {
+                return x;
+            }
+        }
+
+        return null;
+    }
     default List<User> GetAll()
     {
+        Fetch();
        // DBRepository.select(User.class);
         return users;
     }

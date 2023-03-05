@@ -40,6 +40,7 @@ public class RegisterServlet  extends HttpServlet {
         req.getParameter("isAdult");//deprecated
         HttpSession session = req.getSession();
         session.setAttribute("user","yes");
+        session.setAttribute("user_id",reus.getId());
         session.setAttribute("username",reus.getUsername());
         resp.sendRedirect("user/home.jsp");
     }

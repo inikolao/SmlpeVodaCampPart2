@@ -44,9 +44,11 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 if (uf.getUsername().contains("admin")) {
                     session.setAttribute("admin","yes");
+                    session.setAttribute("user_id",uf.getId());
                     resp.sendRedirect("admin/dashboard.jsp");
                 } else {
                     session.setAttribute("user","yes");
+                    session.setAttribute("user_id",uf.getId());
                     session.setAttribute("username",uf.getUsername());
                     resp.sendRedirect("user/home.jsp");
                 }

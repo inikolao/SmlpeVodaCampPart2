@@ -36,7 +36,7 @@
                                 out.print("<th><div class=\"progress\">\n" +
                                         "<div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: "+String.valueOf(x.getEvaluation())+"%\" aria-valuenow=\""+String.valueOf(x.getEvaluation())+"\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n" +
                                         "</div></th>");
-                                out.print("<th><form action=\"bookA\" method=\"post\"> <button type=\"button\" name=\"value\" value=\""+x.getId()+"\" class=\"btn btn-secondary btn-sm\" >Book With</button></th></form></tr>");
+                                out.print("<th><form action=\"booka\" method=\"post\"> <button type=\"submit\" name=\"valueair\" value=\""+x.getId()+"\" class=\"btn btn-secondary btn-sm\" >Book With</button></th></form></tr>");
 
 
                             }

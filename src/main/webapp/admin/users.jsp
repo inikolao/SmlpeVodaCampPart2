@@ -22,6 +22,7 @@
     <tbody>
 <%
     UserRepo ur=new UserRepo();
+    //ur.
     List<User> users=ur.GetAll();
     for (User x:users
          ) {
@@ -30,7 +31,7 @@
         out.print("<th>"+x.getUsername()+"</th>");
         out.print("<th>"+x.getResistrationActive()+"</th>");
         out.print("<th>"+x.isActive()+"</th>");
-        out.print("<th> <button type=\"button\" class=\"btn btn-secondary btn-sm\">Delete</button></th></tr>");
+        out.print("<th> <form actiom=\"../userDelete\" method=\"post\"> <button type=\"submit\" name=\"did\" value=\""+x.getId()+"\" class=\"btn btn-secondary btn-sm\">Delete</button></from></th></tr>");
 
 
     }

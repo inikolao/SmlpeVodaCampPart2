@@ -13,6 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="booking-form">
+                    <h2>One Way</h2>
                     <table class="table table-dark">
                         <thead class="thead-light">
                         <tr>
@@ -35,7 +36,35 @@
                                 <th>${result.airliner.name}</th>
                                 <th>${result.passesngerDetails}</th>
                                 <th>${result.price}</th>
-                                <th> <form action="book" method="post"><button name="value" value="${result.id}" type="submit" class="btn btn-secondary btn-sm">book now</button></form></th>
+                                <th> <form action="flightBook.jsp" method="post"><button name="value" value="${result.id}" type="submit" class="btn btn-secondary btn-sm">book now</button></form></th>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <h2>Return</h2>
+                    <table class="table table-dark">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Flight #</th>
+                            <th scope="col">Home Airport</th>
+                            <th scope="col">Destination Airport</th>
+                            <th scope="col">Departure Date</th>
+                            <th scope="col">Airliner</th>
+                            <th scope="col">Seats for book</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${Results2}" var="result">
+                            <tr>
+                                <th scope="row" >${result.id}</th>
+                                <th>${result.homeAirport}</th>
+                                <th>${result.destinationAirport}</th>ping
+                                <th>${result.flightDate}</th>
+                                <th>${result.airliner.name}</th>
+                                <th>${result.passesngerDetails}</th>
+                                <th>${result.price}</th>
+                                <th> <form action="flightBook.jsp" method="post"><button name="value" value="${result.id}" type="submit" class="btn btn-secondary btn-sm">book now</button></form></th>
                             </tr>
                         </c:forEach>
                         </tbody>

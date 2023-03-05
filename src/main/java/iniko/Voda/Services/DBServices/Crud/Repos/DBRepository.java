@@ -30,6 +30,17 @@ public interface DBRepository {
 
 
     }
+
+    default void update(Object obj)
+    {
+        Session sn=initialise();
+        sn.beginTransaction();
+        sn.update(obj);
+        sn.getTransaction().commit();
+        sn.close();
+
+
+    }
     default void delete(Object obj)
     {
         Session sn=initialise();

@@ -25,6 +25,7 @@ public class User {
     private Date ResistrationActive;
     private boolean IsActive;
     private boolean IsAdmin;
+    private boolean IsPassenger;
 
     public User() {
     }
@@ -107,15 +108,27 @@ public class User {
         Address = address;
     }
 
+    public boolean isPassenger() {
+        return IsPassenger;
+    }
+
+    public void setPassenger(boolean passenger) {
+        IsPassenger = passenger;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", Username='" + Username + '\'' +
                 ", Password='" + Password + '\'' +
+                ", Phone=" + Phone +
+                ", Mobile=" + Mobile +
+                ", Address='" + Address + '\'' +
                 ", ResistrationActive=" + ResistrationActive +
                 ", IsActive=" + IsActive +
                 ", IsAdmin=" + IsAdmin +
+                ", IsPassenger=" + IsPassenger +
                 '}';
     }
 }

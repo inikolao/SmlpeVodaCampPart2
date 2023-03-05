@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebFilter( filterName = "Auth", urlPatterns = {"/admin/*","/user/*"})
+@WebFilter( filterName = "Auth", urlPatterns = {"/admin/*","/user/*","/flightBook"})
 public class AuthenticationFilter extends HttpFilter implements Filter {
 
     @Override
@@ -25,6 +25,11 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
         }
 
         if((user==null)&&(((HttpServletRequest) req).getRequestURI().startsWith("/FyAway_war_exploded/user/")))
+        {
+            ((HttpServletResponse) res).sendRedirect("../login.jsp");
+            return;
+        }
+        if((user==null)&&(((HttpServletRequest) req).getRequestURI().startsWith("/FyAway_war_exploded/flightBook")))
         {
             ((HttpServletResponse) res).sendRedirect("../login.jsp");
             return;
